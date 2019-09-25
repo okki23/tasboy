@@ -145,7 +145,7 @@
             "columns" : [ {
                 "data" : "name"
             },{
-                "data" : "room_id"
+                "data" : "id"
             }],
 
             "rowReorder": {
@@ -312,7 +312,7 @@
       
         
         $('#example').DataTable( {
-            "ajax": "<?php echo base_url(); ?>get_peoples/fetch_people" 
+            "ajax": "get_peoples/fetch_people" 
                
         });
   
