@@ -91,7 +91,7 @@
                                         <tr>  
                                             <th style="width:15%;">Name</th>
                                             <th style="width:15%;">Room ID</th>
-                                      
+                                            <th style="width:15%;">Opsi</th>                                      
                                          </tr>
                                     </thead>
                                     <tbody>
@@ -103,27 +103,39 @@
                     </div>
                 </div>
     </div>
+    
+     <!-- modal listing agenda -->
+     <div class="modal fade" id="AgendaModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" >Listing Agenda</h4>
+                        </div>
+                        <div class="modal-body">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">X Tutup</button>
 
+                                <br>
+                                <hr>
+
+                                 <table width="100%" class="table table-bordered table-striped table-hover " id="listing_agenda" > 
+                                    <thead>
+                                        <tr>  
+                                            <th style="width:15%;">Agenda</th>                               
+                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    </tbody>  
+                                </table>  
+                       </div>
+                     
+                    </div>
+                </div>
+    </div>
  
-      
-
  
    <script type="text/javascript">
-    // function GetUserRooms(id){
-    //     var awal = id;
-    //     var rep = awal.replace("+","");
-    //    //alert(id);
-    //    $.ajax({
-    //         url:"<?php echo base_url(); ?>get_peoples/fetch_user_room",
-    //         type:"POST",
-    //         data:{parsing:rep},
-    //         success:function(result){ 
-    //             console.log(result);                 
-    //         }
-    //         }); 
-         
-    // }
-
+  
 
     function GetUserRooms(id){
         $("#UserRoomsModal").modal({backdrop: 'static', keyboard: false,show:true});
@@ -139,13 +151,14 @@
                 "type":"POST",
                  dataSrc : '',
 
-            },
- 
+            }, 
 
             "columns" : [ {
                 "data" : "name"
             },{
                 "data" : "id"
+            },{
+                "data" : "opsi"
             }],
 
             "rowReorder": {
@@ -158,15 +171,42 @@
  
     } 
 
+    
+    function GetAgenda(id){
+        $("#AgendaModal").modal({backdrop: 'static', keyboard: false,show:true});
 
+        var awal = id;
+        var rep = awal.replace("+","");
+
+        $('#listing_agenda').DataTable({
+            "processing" : true,
+            "ajax" : {
+                url:"<?php echo base_url(); ?>get_peoples/fetch_agenda",
+                "data":{rep},
+                "type":"POST",
+                 dataSrc : '',
+
+            },
+ 
+
+            "columns" : [ {
+                "data" : "name"
+            }],
+
+            "rowReorder": {
+                "update": false
+            },
+
+            "destroy":true,
+        });
+      
+    } 
+ 
 
     function GetCreatedRooms(id){
          console.log(id); 
     }
- 
-      
-
-
+  
     function PreviewGambar(input) {
         if (input.files && input.files[0]){
             var reader = new FileReader();
